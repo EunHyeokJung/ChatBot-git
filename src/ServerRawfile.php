@@ -1,6 +1,6 @@
 <?php
 	$token = $_GET["token"];
-	if($token == "토큰입력") {
+	if($token == "토큰 입력") {
 		$result = "";
 		$lines = @file("sources.txt") or $result = "파일을 읽을 수 없습니다.";
 		if ($lines != null){
