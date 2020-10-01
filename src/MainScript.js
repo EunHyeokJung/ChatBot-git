@@ -1,6 +1,6 @@
 /**********************
  서버 => 봇기기 스크립트 파일 다운 및 리로드
- 메신저봇R 기준
+ 메신저봇 R 기준
 
  Halfhumun (하프)
  2020.10.01
@@ -13,7 +13,7 @@ const scriptName = "Auto-pull";
 
 
 //적용할 타겟 스크립트 이름
-const target_ScriptName = "타겟 스크립트 이름을 입력하세요.";
+const default_ScriptName = "소스를 적용할 기본 스크립트 이름을 입력하세요.";
 
 //봇 스크립트 파일 경로
 path = "애플리케이션 저장소 경로를 입력하세요.";
@@ -25,15 +25,17 @@ url = "웹 url을 입력하세요.";
 const admin = {
     "room" : "방이름을 입력하세요 (room)",
     "name" : "이름을 입력하세요 (sender)",
-    "hash" : //프로필 해시코드를 입력하세요
+    "hash" : Number //프로필 해시코드를 입력하세요
 };
 
 
-//수정 금지
+var reload = false;
+
+//하단부 수정 금지
 var data = null;
 var reqst = false;
 var pcs = false;
-var reload = false;
+var target_ScriptName = null;
 FS = FileStream;
 
 
@@ -74,10 +76,12 @@ function Check() {
     return true;
 }
 
-function Pull() {
+function Pull(targetName) {
+    //target_ScriptName default : specified
+    target_ScriptName = targetName === '' ? default_ScriptName : targetName;
     say('서버 상태 & 스크립트 파일 확인중..');
     //오류 확인
-    if(Check() == true) {
+    if(Check(target_ScriptName) == true) {
         say("서버 파일을 정상적으로 불러왔습니다.\n'" + target_ScriptName + "' 에 적용할까요? (y/n)");
         reqst = true;
         java.lang.Thread.sleep(30000);
@@ -107,7 +111,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if(room != admin.room || hscd != admin.hash || sender != admin.name) return;
 
     //소스적용 함수 호출
-    if(msg == 'hpull run') Pull();
+    if(msg.startsWith('hpull run')) Pull(msg.substr(9).trim());
 
     //소스적용 함수 호출시 리로드 자동화
     if(msg == 'hpull -reload') {
