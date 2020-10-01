@@ -9,7 +9,7 @@
  **********************/
 
 
-const scriptName = "Auto-pull";
+const scriptName = "SourcePuller";
 
 
 //적용할 타겟 스크립트 이름
