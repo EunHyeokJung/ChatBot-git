@@ -1,0 +1,160 @@
+
+Made by HalfhumunKD (하프)
+2020.10.01
+
+
+원작자 표기시 수정 및 공유 가능
+
+
+모바일 기기로 코딩하기 힘든 사람들을 위해
+PC에서 서버로 소스를 업로드하여 해당 소스를 봇이 동작하는 기기로 가져와 저장 및 컴파일을 할 수 있도록 만들어졌습니다.
+
+
+1. 환경 설정
+
+
+MainScript.js는 메신저봇 R 의 스크립트로 들어갑니다.
+ServerRawfile.php는 본인이 호스팅중인 서버의 html 디렉토리에 들어갑니다.
+
+
+
+<MainScript.js>
+
+
+메신저봇 R 스크립트 소스로 Copy-Paste 하거나 파일 관리자에서 메신저봇 R 스크립트의 파일을 변경하세요.
+
+- default_ScriptName (#16):
+    소스를 적용할 스크립트의 이름을 작성하세요.
+    '.js' 확장자 표시는 생략할 수 있습니다.
+
+    ex) const target_ScriptName = "테스트 봇.js";
+
+
+- path (#19):
+    메신저봇 R 애플리케이션의 저장소에서 스크립트들이 존재하는 파일 경로를 입력하세요.
+
+    ex) path = 'sdcard/BotData/Bots';
+
+
+- url (#22):
+    본인이 호스팅중인 서버에서 ServerRawfile.php의 url을 토큰을 포함하여 입력하세요.
+
+    ex) url = "http://YourWebhost.com/ServerRawfile.php?token=토큰";
+
+
+- admin (#25 - #29):
+    스크립트를 사용할 환경에 대한 정보입니다.
+
+    "room": 방이름을 입력하세요. (String)
+    "name": 이름을 입력하세요. (String)
+    "hash": 프로필 해시코드를 입력하세요. (Number)
+
+    프로필 해시코드의 경우 아래 코드를 이용해 구할 수 있습니다.
+    java.lang.String(imageDB.getProfileImage()).hashCode();
+
+    ex)
+    const admin = {
+        "room" : "Half 관리자방",
+        "name" : "HalfhumunKD (하프)",
+        "hash" : -1234567890
+    };
+
+
+
+<ServerRawfile.php>
+
+- $token: 간단한 1차적 보안을 위한 토큰입니다.
+
+    http://YourWebHost.com/ServerRawfile.php?token=토큰 형식으로 사용됩니다.
+
+    ex)
+    ServerRawfile.php (#3)
+    -> if($token == "yourtoken1234") {
+
+    MainScript.js (#22)
+    -> url = "http://YourWebhost.com/ServerRawfile.php?token=yourtoken1234";
+
+
+
+<HTML directory>
+
+- ServerRawfile.php
+
+    해당 php 파일은 html 디렉토리의 source.txt를 기본 html 구조만을 가진상태로 raw로 표시합니다.
+
+
+    source.txt의 위치를 변경하면 이 파일에서의 source.txt 경로도 수정되어야 합니다.
+
+    ServerRawfile.php (#5)
+        -> $lines = @file("source.txt") or $result = "파일을 읽을 수 없습니다.";
+                            ^
+                            파일경로를 추가하여 변경
+
+
+- source.txt
+
+    해당 텍스트 파일은 스크립트 소스를 텍스트로 저장한 파일입니다.
+    ServerRawfile.php에서 해당 파일을 불러와 raw 상태로 표시합니다.
+
+    MainScript.js에서 ServerRawfile을 거쳐 파일내용을 불러와 target_ScriptName 의 스크립트 소스로서 저장합니다.
+
+
+
+
+2. 사용법
+
+
+* sender는 본인이 보내는 메시지를 뜻합니다.
+* response는 답장으로 돌아오는 메시지를 뜻합니다.
+
+
+
+- hpull run (target_ScriptName)
+
+    target_ScriptName은 생략할 수 있습니다.
+    생략할 경우 default_ScriptName 를 대상으로 지정합니다.
+
+    ex)
+    sender: hpull run ChatBot.js
+    response: 서버 상태 & 스크립트 파일 확인중..
+              서버 파일을 정상적으로 불러왔습니다.
+              'ChatBot.js' 에 적용할까요? (y/n)
+
+
+    sender: hpull run
+    response: 서버 상태 & 스크립트 파일 확인중..
+              서버 파일을 정상적으로 불러왔습니다.
+              'ScriptName.js' 에 적용할까요? (y/n)
+
+    target_ScriptName에서 '.js'는 생략할 수 있습니다.
+
+
+
+    (y/n) 에 대한 답변은 다음중 하나여야 합니다.
+    'Y', 'y', 'N', 'n'
+
+    만약 30초 이상 답변이 돌아오지 않으면 자동으로 소스 적용이 취소됩니다.
+
+
+- hpull -reload
+
+    소스 적용시 자동 컴파일 여부를 결정합니다. (boolean)
+    실행시 true/false를 전환할 수 있습니다.
+
+    기본 설정은 false입니다.
+
+    기본 설정을 변경하려면 아래 내용을 참조하세요.
+
+    MainScript.js (#32)
+    -> var reload = false
+                    ^
+                    true로 변경
+
+
+    ex)
+    sender: hpull -reload
+    response: 소스 적용시 자동으로 컴파일: true
+
+    sender: hpull -reload
+    response; 소스 적용시 자동으로 컴파일: false
+
