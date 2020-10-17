@@ -39,6 +39,28 @@ var target_ScriptName = null;
 FS = FileStream;
 
 
+function ConvertTag(WebData) {
+    var mapObj = {
+        "&lt;":"<",
+        "&gt;":">",
+        "&amp;":"&",
+        "&quot":'"',
+        "&nbsp":" ",
+        "&#033":"!",
+        "&#042":"*",
+        "&#039":"'",
+        "&#061":"=",
+        "<br>":"\n"
+    };
+    var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
+    WebData = WebData.replace(re, function(matched){
+        return mapObj[matched];
+    });
+
+    return WebData;
+}
+
+
 //서버, 스크립트 파일 접근 & 오류 반환 / 데이터 저장
 function Check() {
     //이전 작업 상태 확인
@@ -48,7 +70,8 @@ function Check() {
     }
     try{
         //서버, 스크립트 파일 접근
-        data = Utils.getWebText(url).replace(/<br> /g, '\n    ').replace(/<br>/g,'\n').split('<p>')[1].split('</p>')[0].trim();
+        data = Utils.getWebText(url).split("<p>")[0].split("</p>")[1];
+        data = ConvertTag(data);
         FS.read(path + '/' + target_ScriptName.replace('.js','') + '/' + target_ScriptName);
         //스크립트 파일 존재 여부
         if(data == undefined) {
