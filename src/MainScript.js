@@ -47,7 +47,7 @@ function Check() {
         return;
     }
     try{
-        //서버, 스크립트 파일 접근
+        //서버, 스크립트 파일 접근 + 데이터 변환 및 저장
         data = Utils.getWebText(url).replace(/<br>/g,"\n").split("<p>")[1].split("</p>")[0].replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&");
         FS.read(path + '/' + target_ScriptName.replace('.js','') + '/' + target_ScriptName);
         //스크립트 파일 존재 여부
