@@ -70,7 +70,7 @@ function Check() {
     }
     try{
         //서버, 스크립트 파일 접근
-        data = Utils.getWebText(url).split("<p>")[0].split("</p>")[1];
+        data = Utils.getWebText(url).replace(/<br>/g,"\n").split("<p>")[1].split("</p>")[0].replace(/&lt;/g,"<").replace(/&gt/g,">");
         data = ConvertTag(data);
         FS.read(path + '/' + target_ScriptName.replace('.js','') + '/' + target_ScriptName);
         //스크립트 파일 존재 여부
