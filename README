@@ -54,8 +54,8 @@ ServerRawfile.php는 본인이 호스팅중인 서버의 html 디렉토리에 �
 
     ex)
     const admin = {
-        "room" : "Half 관리자방",
-        "name" : "HalfhumunKD (하프)",
+        "room" : "관리자방",
+        "name" : "이름",
         "hash" : -1234567890
     };
 
