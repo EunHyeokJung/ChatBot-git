@@ -1,5 +1,5 @@
 
-Made by HalfhumunKD (하프)
+Made by EunHyeokJung
 2020.10.01
 
 
@@ -24,10 +24,10 @@ ServerRawfile.php는 본인이 호스팅중인 서버의 html 디렉토리에 �
 메신저봇 R 스크립트 소스로 Copy-Paste 하거나 파일 관리자에서 메신저봇 R 스크립트의 파일을 변경하세요.
 
 - default_ScriptName (#16):
-    소스를 적용할 스크립트의 이름을 작성하세요.
+    소스를 적용할 디폴트 스크립트의 이름을 작성하세요.
     '.js' 확장자 표시는 생략할 수 있습니다.
 
-    ex) const target_ScriptName = "테스트 봇.js";
+    ex) const default_ScriptName = "테스트 봇.js";
 
 
 - path (#19):
@@ -54,8 +54,8 @@ ServerRawfile.php는 본인이 호스팅중인 서버의 html 디렉토리에 �
 
     ex)
     const admin = {
-        "room" : "Half 관리자방",
-        "name" : "HalfhumunKD (하프)",
+        "room" : "관리자방",
+        "name" : "이름",
         "hash" : -1234567890
     };
 
