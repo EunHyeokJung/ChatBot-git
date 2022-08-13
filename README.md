@@ -1,6 +1,8 @@
 KakaoBot-SourcePuller - EunHyeokJung
 ======================
 
+made by EunHyeokJung
+Last Update 2022.08.14
 
 ## 이게 뭔데
 
