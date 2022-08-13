@@ -186,7 +186,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if(msg == 'hpull help') {
         replier.reply("KakaoBot-SourcePuller 도움말" + allsee +
             "\n\n이 챗봇은 지정된 서버로부터 업로드된 소스를 받아와 원하는 챗봇에 적용 및 자동 컴파일 하는 기능을 가지고 있습니다." +
-            "\n| hpull -default" +
+            "\n\n\n| hpull -default" +
             "\n현재 지정된 default 스크립트 이름을 확인합니다." +
             "\n(default 스크립트: hpull run 실행시 기본으로 지정될 스크립트)\n" +
             "\n| hpull default (name)" +
