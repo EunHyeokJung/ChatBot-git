@@ -104,7 +104,7 @@ function Pull(targetName) {
     target_ScriptName = targetName === '' ? default_ScriptName : targetName;
     say('서버 상태 & 스크립트 파일 확인중..');
     //오류 확인
-    if(Check(target_ScriptName) == true) {
+    if(Check() == true) {
         say("서버 파일을 정상적으로 불러왔습니다.\n'" + target_ScriptName + ".js' 에 적용할까요? (y/n)");
         reqst = true;
         java.lang.Thread.sleep(30000);
@@ -125,8 +125,6 @@ function exit() {
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
 
-    if(path.endsWith("/")) path = path.slice(0, path.length-1)
-
     //response밖 함수용
     say = (str) => {replier.reply(str);};
 
@@ -137,6 +135,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     if (admin.hash == 0) {
         if(admin.hash != hscd) return;
     }
+
+    if(path.endsWith("/")) path = path.slice(0, path.length-1)
+    if(default_ScriptName.endsWith(".js")) default_ScriptName = default_ScriptName.slice(0, default_ScriptName.length-3);
 
     //Default
     if(msg == "hpull -default") {
