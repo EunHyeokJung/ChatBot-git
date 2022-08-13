@@ -19,7 +19,7 @@ Last Update 2022.08.14
 2. 명령어로 봇기기에서 자동으로 source.txt 파일 접근 후 적용 여부 질답
 3. 적용을 허가하면 지정된 챗봇에 자동 적용 및 컴파일(선택)
 
-ex)
+
 ![image](https://user-images.githubusercontent.com/69712631/184504799-fc75ae26-ec08-4345-a5f1-638d5eb6c2ba.png)
 
 
