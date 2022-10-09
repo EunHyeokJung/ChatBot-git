@@ -56,7 +56,7 @@ Last Update 2022.08.14
     소스 적용시 자동 컴파일 여부를 바꿉니다.
     ##### True일 경우 False로, False일 경우 True로 변경합니다.
     
-2. 자동 컴파일 여부 변경
+2. 자동 컴파일 여부 
 
     ```
     $ hpull -relaod
