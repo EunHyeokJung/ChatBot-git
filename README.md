@@ -1,4 +1,4 @@
-KakaoBot-SourcePuller - EunHyeokJung
+KakaoBot-ChatBot-git - EunHyeokJung
 ======================
 
 made by EunHyeokJung
